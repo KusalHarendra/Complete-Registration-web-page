@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <link rel="stylesheet" href="UserReg.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+</head>
+<body>
+    
+    
+
+   <div class="regform">
+    <div class="heading">
+        <h2><b>User Register</b></h2>
+    </div>
+        <form action="#" id="form" onsubmit="registerUser(event)">
+           <div class="inputs">
+                <p>User name :</p>
+                <p><input type="text" id="username"></p>
+                <p>E-mail :</p>
+                <p><input type="email" id="email"></p>
+                <p>Password :</p>
+                <p><input type="password" id="password"></p>
+                <p>Confirm Password :</p>
+                <p><input type="password" id="passwordcon"></p>
+           </div>
+
+           <div class="error-msg" id="errorMsg">
+
+           </div>
+
+           <div class="regbutton">
+                <button class="button">Register</button>
+           </div>
+            
+        </form>
+   </div>
+   <script>
+
+    let errorMsg;
+        const registerUser = (event) =>{     //"registerUser()"  function
+            event.preventDefault();
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("passwordcon").value;
+
+        const regexEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+
+        const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.[\W]).{8,}$/;
+            
+        
+
+            if(username.length < 8){
+                errorMsg = "Username should consist with minimum 8 characters."
+            }else if(!regexEmail.test(email)){       //validate the input email with the regex
+                errorMsg = "Enter a valid email."
+            }else if(password.length < 8 && !regexPassword.test(password)){      //password length should be 8 and validated with the regex
+                errorMsg = "Enter a valid password."
+            }else if(password !== confirmPassword){
+                errorMsg = "Passwords are not matching."
+            }else{
+                errorMsg = "Successfully Registered";
+            }
+            document.getElementById("errorMsg").innerHTML = errorMsg
+        }
+
+        
+   </script>
+</body>
+</html>
